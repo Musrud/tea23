@@ -3,6 +3,8 @@
 
 #include "CLI/CLI.hpp"
 #include "config.h"
+#include "image.h"
+
 
 auto main(int argc, char **argv) -> int
 {
@@ -29,7 +31,7 @@ auto main(int argc, char **argv) -> int
     fmt::print("Hello, {}!\n", app.get_name());
 
     /* INSERT YOUR CODE HERE */
-
-
+    fmt::println("Length of array is {} HEX-Numbers long", sizeof(image));
+    // Aufgabe 4: objdump -C -t build/bin/exercise-004
     return 0; /* exit gracefully*/
 }

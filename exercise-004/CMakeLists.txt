@@ -14,7 +14,7 @@ find_package(fmt REQUIRED)
 find_package(nlohmann_json REQUIRED)
 find_package(CLI11 CONFIG REQUIRED)
 find_package(Catch2 3 REQUIRED)
-
+find_package(Python3 REQUIRED)
 configure_file("${CMAKE_CURRENT_SOURCE_DIR}/config.h.in" "${CMAKE_CURRENT_BINARY_DIR}/include/config.h" @ONLY)
 include_directories("${CMAKE_CURRENT_BINARY_DIR}/include") # add the output path to the include PATH
 
@@ -29,13 +29,14 @@ add_custom_command(
     COMMAND ${CMAKE_COMMAND} -E env python3 ${CMAKE_CURRENT_SOURCE_DIR}/jpg_to_header.py ${INPUT_IMAGE_PATH} ${GENERATED_HEADER_PATH}
     DEPENDS ${INPUT_IMAGE_PATH}
     COMMENT "Generating header file from image..."
+    # COMMAND ${CMAKE_COMMAND} 
 )
 
 # Add a custom target that depends on the generated header file
 add_custom_target(generate_image_header ALL DEPENDS ${GENERATED_HEADER_PATH})
 
 # add the executable
-add_executable(${PROJECT_NAME} main.cpp ${GENERATED_HEADER_PATH})
+add_executable(${PROJECT_NAME} src/main.cpp ${GENERATED_HEADER_PATH})
 
 
 # Include the generated header in the project
